@@ -5,7 +5,6 @@ import Info from "@/components/info";
 import ProductList from "@/components/product-list";
 import Container from "@/components/ui/container";
 
-//TODO: keep this at the separate location
 export const revalidate = 0;
 
 interface ProductPageProps {

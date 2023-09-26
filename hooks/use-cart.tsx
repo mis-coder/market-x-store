@@ -1,3 +1,8 @@
+import {
+  ITEM_ADDED_IN_CART,
+  ITEM_EXISTS_IN_CART,
+  ITEM_REMOVED_FROM_CART,
+} from "@/constants/toast-messages";
 import { Product } from "@/types";
 import toast from "react-hot-toast";
 import { create } from "zustand";
@@ -19,15 +24,14 @@ const useCart = create(
         const existingItem = currentItems.find((item) => item.id === data.id);
 
         if (existingItem) {
-          //TODO: keep them at separate place
-          return toast("Item already in the cart");
+          return toast(ITEM_EXISTS_IN_CART);
         }
         set({ items: [...get().items, data] });
-        toast.success("Item added to cart.");
+        toast.success(ITEM_ADDED_IN_CART);
       },
       removeItem: (id: string) => {
         set({ items: [...get().items.filter((item) => item.id !== id)] });
-        toast.success("Item removed from cart.");
+        toast.success(ITEM_REMOVED_FROM_CART);
       },
       removeAll: () => set({ items: [] }),
     }),

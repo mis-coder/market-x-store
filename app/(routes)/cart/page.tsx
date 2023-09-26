@@ -1,22 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import Container from "@/components/ui/container";
 import useCart from "@/hooks/use-cart";
 
+import useMounted from "@/hooks/use-mounted";
 import CartItem from "./components/cart-item";
 import Summary from "./components/summary";
 
 export const revalidate = 0;
 
 const CartPage = () => {
-  const [isMounted, setIsMounted] = useState(false);
+  const { isMounted } = useMounted();
   const cart = useCart();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   if (!isMounted) {
     return null;

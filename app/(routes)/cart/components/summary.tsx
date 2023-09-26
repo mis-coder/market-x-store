@@ -6,6 +6,11 @@ import { useEffect } from "react";
 
 import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
+import { POST_CHECKOUT } from "@/constants/end-points";
+import {
+  PAYMENT_COMPLETED,
+  SOMETHING_WENT_WRONG,
+} from "@/constants/toast-messages";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
 
@@ -16,12 +21,12 @@ const Summary = () => {
 
   useEffect(() => {
     if (searchParams.get("success")) {
-      toast.success("Payment completed.");
+      toast.success(PAYMENT_COMPLETED);
       removeAll();
     }
 
     if (searchParams.get("canceled")) {
-      toast.error("Something went wrong.");
+      toast.error(SOMETHING_WENT_WRONG);
     }
   }, [searchParams, removeAll]);
 
@@ -30,12 +35,9 @@ const Summary = () => {
   }, 0);
 
   const onCheckout = async () => {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
-      {
-        productIds: items.map((item) => item.id),
-      }
-    );
+    const response = await axios.post(POST_CHECKOUT, {
+      productIds: items.map((item) => item.id),
+    });
 
     window.location = response.data.url;
   };
