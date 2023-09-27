@@ -1,3 +1,4 @@
+import getStore from "@/actions/get-store";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import ModalProvider from "@/providers/modal-provider";
@@ -8,12 +9,16 @@ import "./globals.css";
 
 const font = Urbanist({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Store",
-  description: "Store",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const store = await getStore();
 
-export default function RootLayout({
+  return {
+    title: store.name,
+    description: "Store created from Market-X",
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
