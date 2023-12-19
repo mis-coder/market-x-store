@@ -16,7 +16,9 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
       </Menu.Button>
       <Menu.Items>
         {data.map((item) => (
-          <Menu.Item>{({ active }) => <div>{item.name}</div>}</Menu.Item>
+          <Menu.Item key={item.id}>
+            {({ active }) => <div>{item.name}</div>}
+          </Menu.Item>
         ))}
       </Menu.Items>
     </Menu>
