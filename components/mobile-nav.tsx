@@ -33,7 +33,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
         <DropdownMenuTrigger asChild>
           <Menu className="cursor-pointer hover:scale-110" size="30" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-48 mr-7 mt-1 bg-white" forceMount>
+        <DropdownMenuContent className="w-48 mr-5 mt-1 bg-white" forceMount>
           <DropdownMenuLabel className="font-bold">
             <p>Categories</p>
           </DropdownMenuLabel>
