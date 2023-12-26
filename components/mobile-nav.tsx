@@ -1,7 +1,10 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { Category } from "@/types";
 import { Menu } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 interface MobileNavProps {
   data: Category[];
@@ -37,14 +37,19 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           <DropdownMenuLabel className="font-bold">
             <p>Categories</p>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-gray-200"/>
+          <DropdownMenuSeparator className="bg-gray-200" />
           <DropdownMenuGroup>
             {routes.map((item) => (
-              <DropdownMenuItem>
-                <Link key={item.href} href={item.href}  className={cn(
-            "text-sm font-medium cursor-pointer transition-colors hover:text-black",
-            item.active ? "text-black" : "text-neutral-500"
-          )}>{item.label}</Link>
+              <DropdownMenuItem key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium cursor-pointer transition-colors hover:text-black",
+                    item.active ? "text-black" : "text-neutral-500"
+                  )}
+                >
+                  {item.label}
+                </Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuGroup>
