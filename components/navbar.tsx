@@ -14,17 +14,19 @@ const Navbar = async () => {
   return (
     <div className="border-b">
       <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
-          <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
-            <p className="font-bold text-xl">{store?.name?.toUpperCase()}</p>
-          </Link>
-          <div className="hidden lg:block">
-            <MainNav data={categories} />
+        <div className="relative w-screen px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+          <div className="flex items-center">
+            <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
+              <p className="font-bold text-xl">{store?.name?.toUpperCase()}</p>
+            </Link>
+            <div className="hidden lg:block">
+              <MainNav data={categories} />
+            </div>
           </div>
-          <div className="sm:block lg:hidden">
+          <div className="flex items-center justify-around gap-3">
+            <NavbarActions />
             <MobileNav data={categories} />
           </div>
-          <NavbarActions />
         </div>
       </Container>
     </div>

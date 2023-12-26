@@ -1,27 +1,56 @@
 "use client";
 
 import { Category } from "@/types";
-import { Menu } from "@headlessui/react";
-import { MenuSquare } from "lucide-react";
+import { Menu } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface MobileNavProps {
   data: Category[];
 }
 
 const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
+  const pathname = usePathname();
+
+  const routes = data.map((route) => ({
+    href: `/category/${route.id}`,
+    label: route.name,
+    active: pathname === `/category/${route.id}`,
+  }));
   return (
-    <Menu>
-      <Menu.Button>
-        <MenuSquare className="h-8 w-8" />
-      </Menu.Button>
-      <Menu.Items>
-        {data.map((item) => (
-          <Menu.Item key={item.id}>
-            {({ active }) => <div>{item.name}</div>}
-          </Menu.Item>
-        ))}
-      </Menu.Items>
-    </Menu>
+    <div className="sm-flex md:hidden lg:hidden">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Menu className="cursor-pointer hover:scale-110" size="30" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-48 mr-7 mt-1 bg-white" forceMount>
+          <DropdownMenuLabel className="font-bold">
+            <p>Categories</p>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-gray-200"/>
+          <DropdownMenuGroup>
+            {routes.map((item) => (
+              <DropdownMenuItem>
+                <Link key={item.href} href={item.href}  className={cn(
+            "text-sm font-medium cursor-pointer transition-colors hover:text-black",
+            item.active ? "text-black" : "text-neutral-500"
+          )}>{item.label}</Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };
 
