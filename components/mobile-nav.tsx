@@ -43,7 +43,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           <DropdownMenuSeparator className="bg-gray-200" />
           <DropdownMenuGroup>
             {routes.map((item) => (
-              <DropdownMenuItem key={item.href}>
+              <DropdownMenuItem key={item.href} asChild>
                 <Link
                   href={item.href}
                   className={cn(
