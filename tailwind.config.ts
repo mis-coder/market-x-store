@@ -14,7 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
-        "slide-down-and-fade": "slide-down 1s linear",
+        "slide-down-and-fade": "slide-down 0.4s linear",
       },
       keyframes: {
         "slide-down": {
